@@ -16,6 +16,7 @@ public class GUI extends JPanel {
         initComponents();
     }
 
+    // do stuff on button click
     private void goButtonActionPerformed(ActionEvent e) {
         String range = rangeIn.getText();
         String lenght = lenghtIn.getText();
