@@ -25,20 +25,32 @@ public class Bubblesort {
     public static String[] sort(String range, String lenght) {
         int unorderedList[] = { 8, 5, 10, 15, 3, 1, 13, 2, 4, 12 };
         if (GUI.checkButton()) {
-            unorderedList = convertIntegers(generateRandomArray(Integer.parseInt(lenght)));
+            // So called "input validation"
+            try {
+                unorderedList = convertIntegers(generateRandomArray(Integer.parseInt(lenght), Integer.parseInt(range)));
+            } catch (Exception e) {
+                System.exit(0);
+            }
         }
 
         String unordered = "";
+        // Array to string
         for (int i : unorderedList)
         {
             unordered = unordered + i + ", ";
         }
 
-        String out[] = {"", ""};
+        String output = "";
+        String out[] = {"", "", ""};
         out[1] = unordered.substring(0, unordered.length()-2);
 
+        long startTime = System.currentTimeMillis();
+
         int tmp[] = bubblesort(unorderedList);
-        String output = "";
+
+        long stopTime = System.currentTimeMillis();
+        long elapsedTime = stopTime - startTime;
+        out[2] = Long.toString(elapsedTime);
 
         for (int i : tmp)
         {
@@ -76,17 +88,19 @@ public class Bubblesort {
         return nums;
     }
 
-    private static List<Integer> generateRandomArray(int lenght){
+    // Generates a random list
+    private static List<Integer> generateRandomArray(int lenght, int range){
         ArrayList<Integer> list = new ArrayList<Integer>(lenght);
         Random random = new Random();
 
         for (int i = 0; i < lenght; i++)
         {
-            list.add(random.nextInt(1000));
+            list.add(random.nextInt(range));
         }
         return list;
     }
 
+    // Converts random list to array
     private static int[] convertIntegers(List<Integer> integers)
     {
         int[] ret = new int[integers.size()];
