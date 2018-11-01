@@ -1,5 +1,8 @@
 package bubblesort;
 
+import javafx.application.Platform;
+import javafx.stage.Stage;
+
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +22,7 @@ public class Bubblesort {
             window.setVisible(true);
         } catch (Exception e) {
             // well, "error handling" might be a bit of a stretch
-            System.exit(0);
+            System.err.println("Application has stopped working"); System.exit(1);
         }
 
     }
@@ -36,7 +39,7 @@ public class Bubblesort {
                 unorderedList = convertIntegers(generateRandomArray(Integer.parseInt(lenght), Integer.parseInt(range)));
             } catch (Exception e) {
                 // whoopsie
-                System.exit(0);
+                System.err.println("Application has stopped working"); System.exit(1);
             }
         }
 
