@@ -1,8 +1,5 @@
 package bubblesort;
 
-import javafx.application.Platform;
-import javafx.stage.Stage;
-
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,29 +26,31 @@ public class Bubblesort {
 
     //Sort array
     public static String[] sort(String range, String lenght) {
-        // preset array
+        // preset array and other variables
         int unorderedList[] = { 8, 5, 10, 15, 3, 1, 13, 2, 4, 12 };
+        String output = "";
+        String out[] = {"", "", ""};
+        String unordered = "";
+
         // see if we should generate random numbers
         if (GUI.checkButton()) {
             // So called "input validation"
             try {
                 // generate random array
-                unorderedList = convertIntegers(generateRandomArray(Integer.parseInt(lenght), Integer.parseInt(range)));
+                unorderedList = generateRandomArray(Integer.parseInt(lenght), Integer.parseInt(range));
             } catch (Exception e) {
-                // whoopsie
-                System.err.println("Application has stopped working"); System.exit(1);
+                // return error message
+                out[0] = "Please enter valid numbers.";
+                return out;
             }
         }
 
-        String unordered = "";
         // Array to string
         for (int i : unorderedList)
         {
             unordered = unordered + i + ", ";
         }
 
-        String output = "";
-        String out[] = {"", "", ""};
         // unsorted array goes here
         out[1] = unordered.substring(0, unordered.length()-2);
 
@@ -105,27 +104,16 @@ public class Bubblesort {
         return nums;
     }
 
-    // Generates a random list
-    private static List<Integer> generateRandomArray(int lenght, int range){
-        ArrayList<Integer> list = new ArrayList<Integer>(lenght);
+    // Generates a random array
+    private static int[] generateRandomArray(int length, int range){
+        int list[] = new int[length];
         Random random = new Random();
 
-        for (int i = 0; i < lenght; i++)
+        for (int i = 0; i < length; i++)
         {
-            list.add(random.nextInt(range));
+            list[i] = random.nextInt(range);
         }
         return list;
-    }
-
-    // Converts random list to array
-    private static int[] convertIntegers(List<Integer> integers)
-    {
-        int[] ret = new int[integers.size()];
-        for (int i=0; i < ret.length; i++)
-        {
-            ret[i] = integers.get(i).intValue();
-        }
-        return ret;
     }
 
 }
